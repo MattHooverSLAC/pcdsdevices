@@ -7,3 +7,12 @@ build
 htmlcov
 .coverage
 .cache
+
+*.egg-info
+logs
+
+# Sphinx
+docs/source/generated/*
+
+#pytest
+.pytest_cache

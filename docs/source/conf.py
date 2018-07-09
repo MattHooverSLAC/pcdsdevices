@@ -20,6 +20,7 @@
 import os
 import sys
 import sphinx_rtd_theme
+import datetime
 
 module_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),'../../')
 sys.path.insert(0,module_path)
@@ -36,27 +37,32 @@ sys.path.insert(0,module_path)
 # ones.
 extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.todo',
+              'sphinx.ext.autosummary',
               'sphinx.ext.napoleon',
               'IPython.sphinxext.ipython_directive',
               'IPython.sphinxext.ipython_console_highlighting',
-              'sphinx.ext.autosectionlabel'
+              'sphinx.ext.autosectionlabel',
+              'm2r'
              ]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
+autosummary_generate = True
+
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
 #
-# source_suffix = ['.rst', '.md']
-source_suffix = '.rst'
+# source_suffix = '.rst'
+source_suffix = ['.rst', '.md']
 
 # The master toctree document.
 master_doc = 'index'
 
 # General information about the project.
 project = 'PCDS Devices'
-copyright = '2017, SLAC National Accelerator Laboratory'
+year = datetime.datetime.now().year
+copyright = '{}, SLAC National Accelerator Laboratory'.format(year)
 author = 'SLAC National Accelerator Laboratory'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -80,6 +86,9 @@ language = None
 # directories to ignore when looking for source files.
 # This patterns also effect to html_static_path and html_extra_path
 exclude_patterns = []
+
+# The reST default role (used for this markup: `text`)
+default_role = 'any'
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'

@@ -1,23 +1,12 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
 """
 Overrides for Epics Signals
 """
-############
-# Standard #
-############
 import time
 import logging
 
-###############
-# Third Party #
-###############
 import numpy as np
 
-##########
-# Module #
-##########
-from ..signal import Signal
+from ophyd import Signal
 
 
 class FakeSignal(Signal):
@@ -171,6 +160,12 @@ class FakeSignal(Signal):
         """
         scale = kwargs.pop("scale", self.noise)
         return np.random.normal(*args, **kwargs) * scale
+
+    def stop(self, *args, **kwargs):
+        """
+        A hack to appease bluesky.
+        """
+        pass
     
     
 
