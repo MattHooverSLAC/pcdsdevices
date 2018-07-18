@@ -17,6 +17,7 @@ from bluesky.utils import ProgressBar
 from ophyd.status import wait as status_wait
 
 logger = logging.getLogger(__name__)
+print('!!!')
 
 
 class MvInterface:
@@ -216,7 +217,8 @@ class Presets:
         self._device = device
         self._methods = []
         self._fd = None
-        self._registry[device.name] = self
+        print('???')
+        Presets._registry[device.name] = self
         self.name = device.name + '_presets'
         self.sync()
 
