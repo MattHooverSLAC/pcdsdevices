@@ -19,7 +19,6 @@ from bluesky.utils import ProgressBar
 from ophyd.status import wait as status_wait
 
 logger = logging.getLogger(__name__)
-print('!!!')
 
 
 class MvInterface:
@@ -246,8 +245,7 @@ class Presets:
         self._device = device
         self._methods = []
         self._fd = None
-        print('???')
-        Presets._registry[device.name] = self
+        self._registry[device.name] = self
         self.name = device.name + '_presets'
         self.sync()
 
@@ -263,7 +261,6 @@ class Presets:
         """
         Utility function to get a particular preset's datum dictionary.
         """
-        logger.debug('read presets for %s', self._device.name)
         with self._file_open_rlock(preset_type) as f:
             f.seek(0)
             return yaml.load(f) or {}
