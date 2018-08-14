@@ -8,7 +8,8 @@ from enum import Enum
 from ophyd.positioner import PositionerBase
 from ophyd.status import wait as status_wait, SubscriptionStatus
 from ophyd.signal import EpicsSignal, EpicsSignalRO
-from ophyd.device import Device, Component as Cpt, FormattedComponent as FCpt
+from ophyd.device import (Device, Component as Cpt, FormattedComponent as FCpt, 
+                          DynamicDeviceComponent as DDCpt)
 
 from .doc_stubs import basic_positioner_init
 from .mv_interface import MvInterface
@@ -391,9 +392,12 @@ class StateRecordPositioner(StatePositioner):
     state = Cpt(EpicsSignal, '', write_pv=':GO', kind='hinted')
     readback = FCpt(EpicsSignalRO, '{self.prefix}:{self._readback}',
                     kind='normal')
+    states
 
     def __init__(self, prefix, *, name, **kwargs):
-        some_state = self.states_list[0]
+        states_dict = dict()
+        for state in self.states_list:
+            states_dict[state.name] = (EpicsSignal, ':'state.name.upper(), {})
         self._readback = '{}_CALC.A'.format(some_state)
         super().__init__(prefix, name=name, **kwargs)
         self._has_subscribed_readback = False
